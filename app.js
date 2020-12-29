@@ -21,7 +21,7 @@ const bot = linebot({
 const linebotParser = bot.parser();
 
 bot.on('message', function (event) {
-  console.log(event);
+  // console.log(event);
   // 這樣寫會重複別人的留言內容
   // event.reply(event.message.text)
   //   .then(function (data) {
