@@ -22,12 +22,24 @@ const linebotParser = bot.parser();
 
 bot.on('message', function (event) {
   console.log(event);
-  event.reply(event.message.text)
-    .then(function (data) {
-      // success
-    }).catch(function (error) {
-      // error
-    });
+  // 這樣寫會重複別人的留言內容
+  // event.reply(event.message.text)
+  //   .then(function (data) {
+  //     // success
+  //   }).catch(function (error) {
+  //     // error
+  //   });
+  switch (event.message.text) {
+    case 'Hi':
+      event.reply('別hi了，我都30好幾了，話要說重點！')
+      break
+    case '你好':
+      event.reply('好什麼！老子都不老子了！')
+      break
+    case '30':
+      event.reply('對啦我就30幾了還在想轉職啊，你不一定要很厲害才可以開始，但你不開始就不會很厲害啦！')
+      break
+  }
 });
 
 app.post('/', linebotParser);
