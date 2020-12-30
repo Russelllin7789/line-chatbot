@@ -2,6 +2,9 @@
 const express = require('express')
 const app = express()
 
+// 引入get-json套件以解析資料
+const getJSON = require('get-json')
+
 // 按照官方 npm 文件引入 line chatbot
 // https://www.npmjs.com/package/linebot
 const linebot = require('linebot');
@@ -19,6 +22,7 @@ const bot = linebot({
 });
 
 const linebotParser = bot.parser();
+app.post('/', linebotParser);
 
 bot.on('message', function (event) {
   console.log(event);
@@ -30,8 +34,17 @@ bot.on('message', function (event) {
   //     // error
   //   });
   switch (event.message.text) {
-    case ('Hi' || 'hi' || 'hello'):
-      event.reply('別hi了，我都30好幾了，話要說重點！')
+    case ('Hi'):
+      event.reply('別嗨了，我都30好幾了，很難嗨！')
+      break
+    case ('hi'):
+      event.reply('別嗨了，我都30好幾了，很難嗨！')
+      break
+    case ('hello'):
+      event.reply('別嗨了，我都30好幾了，很難嗨！')
+      break
+    case ('Hello'):
+      event.reply('別嗨了，我都30好幾了，很難嗨！')
       break
     case '你好':
       event.reply('好什麼！老子都不老子了！')
@@ -39,8 +52,8 @@ bot.on('message', function (event) {
     case '30':
       event.reply('30幾了就是要轉職啊，你不一定要很厲害才可以開始，但你不開始就不會變厲害啦！')
       break
-    default:
-      event.reply('欸說個秘密，你/妳打什麼我看不懂：）')
+    // default:
+    //   event.reply('欸說個秘密，你/妳打什麼我看不懂：）')
   }
 });
 
@@ -50,7 +63,7 @@ bot.on('message', function (event) {
   let userId = event.source.userId
   if (userId = 'U35f8f5afe85fd30a7b262492f96c2f98') {
     setTimeout(() => {
-      const autoMsg = '林瑋豪別再懶惰了！'
+      const autoMsg = '記得勸林瑋豪別再耍廢了！'
       bot.push(userId, autoMsg)
       console.log('send:', autoMsg)
     }, 3000)
@@ -58,12 +71,50 @@ bot.on('message', function (event) {
 })
 
 // 增加功能性的互動
+let timer = ''
+let pm = []
+// 引入開放資料庫的資料，並每半小時 update data
+getPmData()
 
+function getPmData() {
+  clearTimeout(timer)
+  getJSON('http://opendata2.epa.gov.tw/AQX.json', (error, response) => {
+    response.forEach((e, i) => {
+      pm[i] = []
+      pm[i][0] = e.Sitename
+      pm[i][1] = e['PM2.5'] * 1
+      pm[i][2] = e.PM10 * 1
+    })
+  })
+  timer = setInterval(getPmData, 1800000)
+}
+
+bot.on('message', function (event) {
+  if (event.message.type === 'text') {
+    console.log(event)
+    let msg = event.message.text
+    let reply = ''
+    pm.forEach((a) => {
+      if (msg.indexOf(a[0]) !== '-1') {
+        reply = `現在${a[0]}的 PM 2.5 約為 ${a[1]} 喔～ `
+      }
+    })
+    if (reply === '') {
+      reply = '沒這個地方的資料喔QAQ"'
+    }
+    event.reply(reply)
+      .then(() => {
+        console.log(reply)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
 
 // 增加特殊形式（圖文/按鈕）的互動
 
 
-app.post('/', linebotParser);
 app.listen(process.env.PORT || 3000, () => {
   console.log('Express server start')
 });
