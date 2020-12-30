@@ -124,7 +124,7 @@ bot.on('sticker', function (event) {
     packageId: 11539,
     stickerId: 52114136
   }
-  event.reply(reply)
+  event.reply(JSON.stringify(reply))
     .then(() => {
       console.log(reply)
     })
