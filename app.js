@@ -123,10 +123,10 @@ bot.on('message', function (event) {
     console.log(event)
     reply = {
       type: 'sticker',
-      packageId: 11539,
-      stickerId: 52114136
+      packageId: '11539',
+      stickerId: '52114136'
     }
-    event.reply(JSON.stringify(reply))
+    event.reply(reply)
       .then(() => {
         console.log(reply)
       })
