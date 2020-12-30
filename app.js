@@ -116,21 +116,23 @@ bot.on('message', function (event) {
 
 // 增加特殊形式（圖文/按鈕）的互動
 bot.on('sticker', function (event) {
+  let reply = ''
   if (event.message.type === 'sticker') {
     console.log(event)
+    reply = {
+      type: sticker,
+      packageId: 11539,
+      stickerId: 52114136
+    }
+    event.reply(JSON.stringify(reply))
+      .then(() => {
+        console.log(reply)
+      })
+      .catch((error) => {
+        console.log('error:', error)
+      })
   }
-  let reply = {
-    type: sticker,
-    packageId: 11539,
-    stickerId: 52114136
-  }
-  event.reply(JSON.stringify(reply))
-    .then(() => {
-      console.log(reply)
-    })
-    .catch((error) => {
-      console.log('error:', error)
-    })
+  return
 })
 
 app.listen(process.env.PORT || 3000, () => {
