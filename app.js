@@ -78,8 +78,7 @@ getPmData()
 
 function getPmData() {
   clearTimeout(timer)
-  getJSON('https://data.epa.gov.tw/api/v1/aqx_p_02?offset=0&limit=1000&api_key=5a9eada2-2c36-45cc-834b-1d9235d672b8', (error, response)
-    => {
+  getJSON('https://data.epa.gov.tw/api/v1/aqx_p_02?offset=0&limit=1000&api_key=5a9eada2-2c36-45cc-834b-1d9235d672b8', function (error, response) {
     if (response) {
       const { records } = response
       console.log(records)
