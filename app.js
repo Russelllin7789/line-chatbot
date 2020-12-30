@@ -95,8 +95,10 @@ bot.on('message', function (event) {
     let msg = event.message.text
     let reply = ''
 
+    // 使用 forEach 遍歷陣列
     pm.forEach(item => {
-      if (item.Site === msg) {
+      // 使用 indexOf 比對 msg 和 每一個陣列的 Site 值
+      if (item.Site.indexOf(msg) !== -1) {
         reply = `現在${msg}的 PM 2.5 約為 ${item.PM25} 喔～ `
       }
     })
@@ -120,7 +122,7 @@ bot.on('message', function (event) {
   if (event.message.type === 'sticker') {
     console.log(event)
     reply = {
-      type: sticker,
+      type: 'sticker',
       packageId: 11539,
       stickerId: 52114136
     }
