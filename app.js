@@ -100,11 +100,6 @@ bot.on('message', function (event) {
         reply = `現在${msg}的 PM 2.5 約為 ${item.PM25} 喔～ `
       }
     })
-    // let a = $.map(pm, function (item) { return item.Site }).indexOf('msg')
-    // if (a !== '-1') {
-    //   reply = `現在${msg}的 PM 2.5 約為 ${pm[a].PM25} 喔～ `
-    // }
-
     if (reply === '') {
       reply = '沒這個地方的資料喔QAQ"'
     }
@@ -120,7 +115,23 @@ bot.on('message', function (event) {
 })
 
 // 增加特殊形式（圖文/按鈕）的互動
-
+bot.on('sticker', function (event) {
+  if (event.message.type === 'sticker') {
+    console.log(event)
+  }
+  let reply = {
+    type: sticker,
+    packageId: 11539,
+    stickerId: 52114136
+  }
+  event.reply(reply)
+    .then(() => {
+      console.log(reply)
+    })
+    .catch((error) => {
+      console.log('error:', error)
+    })
+})
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Express server start')
