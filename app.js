@@ -43,6 +43,13 @@ bot.on('message', function (event) {
       event.reply('欸說個秘密，你/妳打什麼我看不懂：）')
   }
   // 增加對特定使用者的回覆
+  setTimeout(() => {
+    const userID = 'U35f8f5afe85fd30a7b262492f96c2f98'
+    const autoMsg = '林瑋豪別再懶惰了！'
+    bot.push(userId, autoMsg)
+    console.log('send:', autoMsg)
+  }, 3000)
+
   // 增加特殊形式的互動
 });
 
