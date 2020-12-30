@@ -94,10 +94,16 @@ bot.on('message', function (event) {
     console.log(event)
     let msg = event.message.text
     let reply = ''
-    let a = $.map(pm, function (item) { return item.Site }).indexOf('msg')
-    if (a !== '-1') {
-      reply = `現在${msg}的 PM 2.5 約為 ${pm[a].PM25} 喔～ `
-    }
+
+    pm.forEach(item => {
+      if (item.Site === msg) {
+        reply = `現在${msg}的 PM 2.5 約為 ${item.PM25} 喔～ `
+      }
+    })
+    // let a = $.map(pm, function (item) { return item.Site }).indexOf('msg')
+    // if (a !== '-1') {
+    //   reply = `現在${msg}的 PM 2.5 約為 ${pm[a].PM25} 喔～ `
+    // }
 
     if (reply === '') {
       reply = '沒這個地方的資料喔QAQ"'
