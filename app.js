@@ -81,7 +81,8 @@ function getPmData() {
   getJSON('https://data.epa.gov.tw/api/v1/aqx_p_02?offset=0&limit=1000&api_key=5a9eada2-2c36-45cc-834b-1d9235d672b8', function (error, response) {
     if (response) {
       const { records } = response
-      console.log(records)
+      pm = [...records]
+      console.log(pm)
     }
     return console.log('error:', error)
   })
@@ -93,11 +94,11 @@ bot.on('message', function (event) {
     console.log(event)
     let msg = event.message.text
     let reply = ''
-    pm.forEach((a) => {
-      if (msg.indexOf(a[0]) !== '-1') {
-        reply = `現在${a[0]}的 PM 2.5 約為 ${a[1]} 喔～ `
-      }
-    })
+    let a = $.map(pm, function (item) { return item.Site }).indexOf('msg')
+    if (a !== '-1') {
+      reply = `現在${msg}的 PM 2.5 約為 ${pm[a].PM25} 喔～ `
+    }
+
     if (reply === '') {
       reply = '沒這個地方的資料喔QAQ"'
     }
@@ -109,6 +110,7 @@ bot.on('message', function (event) {
         console.log(error)
       })
   }
+  return
 })
 
 // 增加特殊形式（圖文/按鈕）的互動
