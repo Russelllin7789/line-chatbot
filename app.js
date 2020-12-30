@@ -78,8 +78,9 @@ getPmData()
 
 function getPmData() {
   clearTimeout(timer)
-  getJSON('http://opendata2.epa.gov.tw/AQX.json', (response) => {
-    console.log(response)
+  getJSON('http://opendata2.epa.gov.tw/AQX.json', (error, response) => {
+    if (response) { console.log(response) }
+    return error
   })
   timer = setInterval(getPmData, 1800000)
 }
