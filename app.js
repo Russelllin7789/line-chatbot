@@ -115,7 +115,7 @@ bot.on('message', function (event) {
 })
 
 // 增加特殊形式（圖文/按鈕）的互動
-bot.on('sticker', function (event) {
+bot.on('message', function (event) {
   let reply = ''
   if (event.message.type === 'sticker') {
     console.log(event)
