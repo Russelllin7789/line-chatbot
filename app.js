@@ -21,7 +21,7 @@ const bot = linebot({
 const linebotParser = bot.parser();
 
 bot.on('message', function (event) {
-  // console.log(event);
+  console.log(event);
   // 這樣寫會重複別人的留言內容
   // event.reply(event.message.text)
   //   .then(function (data) {
@@ -30,16 +30,20 @@ bot.on('message', function (event) {
   //     // error
   //   });
   switch (event.message.text) {
-    case 'Hi':
+    case ('Hi' || 'hi' || 'hello'):
       event.reply('別hi了，我都30好幾了，話要說重點！')
       break
     case '你好':
       event.reply('好什麼！老子都不老子了！')
       break
     case '30':
-      event.reply('對啦我就30幾了還在想轉職啊，你不一定要很厲害才可以開始，但你不開始就不會很厲害啦！')
+      event.reply('30幾了就是要轉職啊，你不一定要很厲害才可以開始，但你不開始就不會變厲害啦！')
       break
+    default:
+      event.reply('欸說個秘密，你/妳打什麼我看不懂：）')
   }
+  // 增加對特定使用者的回覆
+  // 增加特殊形式的互動
 });
 
 app.post('/', linebotParser);
