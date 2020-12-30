@@ -79,12 +79,7 @@ getPmData()
 function getPmData() {
   clearTimeout(timer)
   getJSON('http://opendata2.epa.gov.tw/AQX.json', (response) => {
-    response.forEach((e, i) => {
-      pm[i] = []
-      pm[i][0] = e.Sitename
-      pm[i][1] = e['PM2.5'] * 1
-      pm[i][2] = e.PM10 * 1
-    })
+    console.log(response)
   })
   timer = setInterval(getPmData, 1800000)
 }
