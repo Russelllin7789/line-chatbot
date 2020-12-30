@@ -78,7 +78,7 @@ getPmData()
 
 function getPmData() {
   clearTimeout(timer)
-  getJSON('http://opendata2.epa.gov.tw/AQX.json', (error, response) => {
+  getJSON('http://opendata2.epa.gov.tw/AQX.json', (response) => {
     response.forEach((e, i) => {
       pm[i] = []
       pm[i][0] = e.Sitename
