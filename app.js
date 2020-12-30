@@ -48,7 +48,7 @@ bot.on('message', function (event) {
 bot.on('message', function (event) {
   console.log(event)
   // 增加對特定使用者的回覆
-  const userId = event.source.userId
+  let userId = event.source.userId
   if (userId = 'U35f8f5afe85fd30a7b262492f96c2f98') {
     setTimeout(() => {
       const autoMsg = '林瑋豪別再懶惰了！'
