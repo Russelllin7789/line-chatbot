@@ -61,7 +61,7 @@ bot.on('message', function (event) {
 bot.on('message', function (event) {
   console.log(event)
   let userId = event.source.userId
-  if (userId = 'U35f8f5afe85fd30a7b262492f96c2f98') {
+  if (userId === 'U35f8f5afe85fd30a7b262492f96c2f98' || 'U3a7d6f4f22538676db3902fa501fb18b' || 'U12cf579d34133bde480b1b075fcc5dfd') {
     setTimeout(() => {
       const autoMsg = '記得勸林瑋豪別再耍廢了！'
       bot.push(userId, autoMsg)
