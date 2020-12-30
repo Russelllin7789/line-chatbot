@@ -78,9 +78,13 @@ getPmData()
 
 function getPmData() {
   clearTimeout(timer)
-  getJSON('http://opendata2.epa.gov.tw/AQX.json', (error, response) => {
-    if (response) { console.log(response) }
-    return error
+  getJSON('https://data.epa.gov.tw/api/v1/aqx_p_02?offset=0&limit=1000&api_key=5a9eada2-2c36-45cc-834b-1d9235d672b8', (error, response)
+    => {
+    if (response) {
+      const { records } = response
+      console.log(records)
+    }
+    return console.log('error:', error)
   })
   timer = setInterval(getPmData, 1800000)
 }
